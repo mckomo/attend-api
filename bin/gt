@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'digest'
+
+raise 'You must provide ZOHO_PEOPLE_ROOT_TOKEN as env variable' unless ENV['ZOHO_PEOPLE_ROOT_TOKEN']
+
+puts Digest::SHA1.hexdigest("#{ARGV[0]}.#{ENV['ZOHO_PEOPLE_ROOT_TOKEN']}")
