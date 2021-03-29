@@ -5,7 +5,7 @@ Use `curl` to register attendance in Zoho People. Service will skip holidays or 
 ```shell
 curl https://api-attend.herokuapp.com/ \
     -X POST \
-    -H "Authorization: Berer <your-token>" \
+    -H "Authorization: Bearer <your-token>" \
     -d "email=name@example.com" \
     -d "from=2021-03-01" \
     -d "to=2021-03-31" \
@@ -17,10 +17,10 @@ curl https://api-attend.herokuapp.com/ \
 
 ### Authorization
 
-Pass `Authorization` header with `Berer` token.
+Pass `Authorization` header with `Bearer` token.
 
 ```http request
-Authorization: Berer <your-token>
+Authorization: Bearer <your-token>
 ```
 
 ### Parameters:
@@ -40,7 +40,7 @@ Register current day with default check in times.
 ```shell
 curl https://api-attend.herokuapp.com/ \
     -X POST \
-    -H "Authorization: Berer <your-token>" \
+    -H "Authorization: Bearer <your-token>" \
     -d "email=name@example.com"
 ```
 
@@ -49,7 +49,7 @@ Register one week with custom check in times.
 ```shell
 curl https://api-attend.herokuapp.com/ \
     -X POST \
-    -H "Authorization: Berer <your-token>" \
+    -H "Authorization: Bearer <your-token>" \
     -d "email=name@example.com" \
     -d "from=2021-03-22" \
     -d "to=2021-03-26" \
