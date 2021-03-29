@@ -12,7 +12,7 @@ get '/' do
 end
 
 post '/' do
-  auth_token = env.fetch('HTTP_AUTHORIZATION', '').slice(6..-1)
+  auth_token = env.fetch('HTTP_AUTHORIZATION', '').slice(7..-1)
   computed_token = Digest::SHA1.hexdigest("#{params[:email]}.#{ENV['ZOHO_PEOPLE_ROOT_TOKEN']}")
 
   halt 401, 'Unuthorized' unless auth_token == computed_token
