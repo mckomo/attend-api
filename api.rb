@@ -15,7 +15,7 @@ post '/' do
   auth_token = env.fetch('HTTP_AUTHORIZATION', '').slice(7..-1)
   computed_token = Digest::SHA1.hexdigest("#{params[:email]}.#{ENV['ZOHO_PEOPLE_ROOT_TOKEN']}")
 
-  halt 401, 'Unuthorized' unless auth_token == computed_token
+  halt 401, 'Unauthorized' unless auth_token == computed_token
 
   stream do |out|
     out << "\r\n"
@@ -25,10 +25,10 @@ post '/' do
     options += ['--email', params[:email]] if params[:email]
     options += ['--from', params[:from]] if params[:from]
     options += ['--to', params[:to]] if params[:to]
-    options += ['--check_in', params[:check_in]] if params[:from]
-    options += ['--check_out', params[:check_out]] if params[:to]
+    options += ['--check_in', params[:check_in]] if params[:check_in]
+    options += ['--check_out', params[:check_out]] if params[:check_out]
 
-    Open3.popen2e({ 'ZOHO_PEOPLE_AUTH_TOKEN' => ENV['ZOHO_PEOPLE_ROOT_TOKEN'] }, 'attend', *options) do |_, stdoe|
+    Open3.popen2e({ 'ZOHO_PEOPLE_ROOT_TOKEN' => ENV['ZOHO_PEOPLE_ROOT_TOKEN'] }, 'attend', *options) do |_, stdoe|
       stdoe.each { |line| out << line }
     end
   end
